@@ -1,0 +1,11 @@
+version: 2
+models:
+  - name: format_injested_json
+    description: "Model for transforming raw author JSON into structured data"
+    tests:
+      - unique:
+          column_name: AUTHOR_UID
+      - not_null:
+          column_name: FIRST_NAME
+      - not_null:
+          column_name: LAST_NAME
