@@ -9,3 +9,13 @@ models:
           column_name: FIRST_NAME
       - not_null:
           column_name: LAST_NAME
+
+  - name: books_data
+    description: "Model for seeding books data"
+    tests:
+      - unique:
+          column_name: BOOK_UID
+      - not_null:
+          column_name: TITLE
+      - not_null:
+          column_name: AUTHOR_UID
