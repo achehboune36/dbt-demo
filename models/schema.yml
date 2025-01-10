@@ -27,3 +27,58 @@ models:
           column_name: BOOK_UID
       - not_null:
           column_name: FORMATTED_RELEASE_DATE
+
+  - name: product_summary
+    description: "A summary of products by category including count, average price, and total quantity"
+    columns:
+      - name: category
+        description: "The category of the product"
+        tests:
+          - not_null
+      - name: product_count
+        description: "The count of products in each category"
+        tests:
+          - unique
+      - name: average_price
+        description: "The average price of products in the category"
+      - name: total_quantity
+        description: "The total quantity of products in the category"
+
+  - name: regional_sales
+    description: "The total sales and quantity sold per region"
+    columns:
+      - name: region
+        description: "The region for which sales data is reported"
+        tests:
+          - not_null
+      - name: total_quantity_sold
+        description: "The total quantity of products sold in the region"
+        tests:
+          - not_null
+          - dbt_utils.greater_than:
+              column_name: total_quantity_sold
+              value: 0
+      - name: total_sales_value
+        description: "The total value of sales in the region"
+        tests:
+          - not_null
+          - dbt_utils.greater_than:
+              column_name: total_sales_value
+              value: 0
+
+  - name: top_products_by_quantity
+    description: "Top 5 products based on the quantity sold"
+    columns:
+      - name: id
+        description: "The unique identifier for the product"
+        tests:
+          - not_null
+          - unique
+      - name: name
+        description: "The name of the product"
+        tests:
+          - not_null
+      - name: category
+        description: "The category of the product"
+      - name: quantity
+        description: "The quantity sold for the product"
