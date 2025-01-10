@@ -19,3 +19,11 @@ models:
           column_name: TITLE
       - not_null:
           column_name: AUTHOR_UID
+
+  - name: formated_dates
+    description: "Model for seeding books data but with formated dates"
+    tests:
+      - unique:
+          column_name: BOOK_UID
+      - not_null:
+          column_name: FORMATTED_RELEASE_DATE
