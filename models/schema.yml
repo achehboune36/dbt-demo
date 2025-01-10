@@ -65,3 +65,20 @@ models:
           - dbt_utils.greater_than:
               column_name: total_sales_value
               value: 0
+
+  - name: top_products_by_quantity
+    description: "Top 5 products based on the quantity sold"
+    columns:
+      - name: id
+        description: "The unique identifier for the product"
+        tests:
+          - not_null
+          - unique
+      - name: name
+        description: "The name of the product"
+        tests:
+          - not_null
+      - name: category
+        description: "The category of the product"
+      - name: quantity
+        description: "The quantity sold for the product"
