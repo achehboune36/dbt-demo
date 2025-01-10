@@ -1,4 +1,4 @@
-WITH formatted_dates AS (
+WITH formated_dates AS (
     SELECT
         BOOK_UID,
         TITLE,
@@ -15,5 +15,7 @@ SELECT
     TITLE,
     AUTHOR_UID,
     RELEASE_DATE,
+    month_number,
+    year,
     {{ convert_date_format('month_number', 'day', 'year') }} AS FORMATTED_RELEASE_DATE
-FROM formatted_dates
+FROM formated_dates
