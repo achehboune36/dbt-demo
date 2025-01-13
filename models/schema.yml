@@ -1,4 +1,5 @@
 version: 2
+
 models:
   - name: format_injested_json
     description: "Model for transforming raw author JSON into structured data"
@@ -55,16 +56,15 @@ models:
         description: "The total quantity of products sold in the region"
         tests:
           - not_null
-          - dbt_utils.greater_than:
-              column_name: total_quantity_sold
-              value: 0
+          - dbt_utils.expression_is_true:
+              expression: " > 0"
+
       - name: total_sales_value
         description: "The total value of sales in the region"
         tests:
           - not_null
-          - dbt_utils.greater_than:
-              column_name: total_sales_value
-              value: 0
+          - dbt_utils.expression_is_true:
+              expression: " > 0"
 
   - name: top_products_by_quantity
     description: "Top 5 products based on the quantity sold"
@@ -82,3 +82,17 @@ models:
         description: "The category of the product"
       - name: quantity
         description: "The quantity sold for the product"
+
+  - name: avg_quantity_per_supplier
+    description: "The average quantity sold per supplier"
+    columns:
+      - name: supplier_id
+        description: "The unique identifier for the supplier"
+        tests:
+          - not_null
+      - name: average_quantity_sold
+        description: "The average quantity sold by the supplier"
+        tests:
+          - not_null
+          - dbt_utils.expression_is_true:
+              expression: " > 0"
